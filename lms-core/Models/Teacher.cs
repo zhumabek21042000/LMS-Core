@@ -30,5 +30,8 @@ namespace lms_core.Models
         {
             get { return LastName + ", " + FirstName; }
         }
+
+        public ICollection<CourseAssignment> CourseAssignments { get; set; }
+        public OfficeAssignment OfficeAssignment { get; set; }
     }
     }

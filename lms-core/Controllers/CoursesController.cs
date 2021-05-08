@@ -20,49 +20,10 @@ namespace lms_core.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index(
-            string sortOrder,
-            string currentFilter,
-            string searchString,
-            int? pageNumber)
+        public async Task<IActionResult> Index()
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-            ViewData["TotalHoursSortParm"] = sortOrder == "TotalHours" ? "th_desc" : "TotalHours";
-            if (searchString != null)
-            {
-                pageNumber = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewData["CurrentFilter"] = searchString;
-            var courses = from s in _context.Courses
-                           select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                courses = courses.Where(s => s.Title.Contains(searchString)
-                                       || s.Description.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "title_desc":
-                    courses = courses.OrderByDescending(s => s.Title);
-                    break;
-                case "TotalHours":
-                    courses = courses.OrderBy(s => s.TotalHours);
-                    break;
-                case "th_desc":
-                    courses = courses.OrderByDescending(s => s.TotalHours);
-                    break;
-                default:
-                    courses = courses.OrderBy(s => s.Title);
-                    break;
-            }
-            int pageSize = 3;
-            return View(await PaginatedList<Course>.CreateAsync(courses.AsNoTracking(), pageNumber ?? 1, pageSize));
+            var courseContext = _context.Courses.Include(c => c.Department);
+            return View(await courseContext.ToListAsync());
         }
 
         // GET: Courses/Details/5
@@ -74,6 +35,7 @@ namespace lms_core.Controllers
             }
 
             var course = await _context.Courses
+                .Include(c => c.Department)
                 .FirstOrDefaultAsync(m => m.CourseID == id);
             if (course == null)
             {
@@ -86,6 +48,7 @@ namespace lms_core.Controllers
         // GET: Courses/Create
         public IActionResult Create()
         {
+            ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentID");
             return View();
         }
 
@@ -94,7 +57,7 @@ namespace lms_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CourseID,Title,Description,TotalHours")] Course course)
+        public async Task<IActionResult> Create([Bind("CourseID,Title,Description,TotalHours,DepartmentID")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -102,6 +65,7 @@ namespace lms_core.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentID", course.DepartmentID);
             return View(course);
         }
 
@@ -118,6 +82,7 @@ namespace lms_core.Controllers
             {
                 return NotFound();
             }
+            ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentID", course.DepartmentID);
             return View(course);
         }
 
@@ -126,7 +91,7 @@ namespace lms_core.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CourseID,Title,Description,TotalHours")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("CourseID,Title,Description,TotalHours,DepartmentID")] Course course)
         {
             if (id != course.CourseID)
             {
@@ -153,6 +118,7 @@ namespace lms_core.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentID", "DepartmentID", course.DepartmentID);
             return View(course);
         }
 
@@ -165,6 +131,7 @@ namespace lms_core.Controllers
             }
 
             var course = await _context.Courses
+                .Include(c => c.Department)
                 .FirstOrDefaultAsync(m => m.CourseID == id);
             if (course == null)
             {

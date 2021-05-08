@@ -161,3 +161,13 @@ C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Cours
 C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Courses\Edit.cshtml.g.cs
 C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Courses\Index.cshtml.g.cs
 C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Teachers\Create.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Teachers\Delete.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Teachers\Details.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Teachers\Edit.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Teachers\Index.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Departments\Create.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Departments\Delete.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Departments\Details.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Departments\Edit.cshtml.g.cs
+C:\Users\zhuma\source\repos\lms-core\lms-core\obj\Debug\net5.0\Razor\Views\Departments\Index.cshtml.g.cs

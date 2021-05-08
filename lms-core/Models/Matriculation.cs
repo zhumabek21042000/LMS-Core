@@ -12,6 +12,7 @@ namespace lms_core.Models
         public int EnrollmentID { get; set; }
         public int CourseID { get; set; }
         public int StudentID { get; set; }
+        [DisplayFormat(NullDisplayText = "No grade")]
         public double Grade { get; set; }
 
         public Course Course { get; set; }
